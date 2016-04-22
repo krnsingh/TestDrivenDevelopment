@@ -8,10 +8,10 @@ import cucumber.api.java.en.When;
 
 import java.util.List;
 
+import static org.hamcrest.CoreMatchers.hasItems;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.Matchers.notNullValue;
+import static org.hamcrest.Matchers.*;
 
 public class CollectionsStepdefs {
 
@@ -31,7 +31,7 @@ public class CollectionsStepdefs {
 
     @Then("^the result should be$")
     public void the_result_should_be(List<String> countryList) throws Throwable {
-        assertThat(countries, containsInAnyOrder(countryList));
+        assertThat(countries, containsInAnyOrder(countryList.toArray()));
     }
 }
 ;
