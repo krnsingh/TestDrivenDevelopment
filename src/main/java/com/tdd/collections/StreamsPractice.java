@@ -2,7 +2,9 @@ package com.tdd.collections;
 
 import com.tdd.entity.Address;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StreamsPractice {
 
@@ -12,7 +14,9 @@ public class StreamsPractice {
      * @return
      */
     public static List<String> countries(List<Address> addresses) {
-        return null;
+
+        List<String> country=addresses.stream().map(obj -> obj.getCountry()).distinct().collect(Collectors.toList());
+        return country;
     }
 
 }
