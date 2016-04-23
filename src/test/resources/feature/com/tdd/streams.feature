@@ -13,3 +13,36 @@ Feature: To test various stream collection exercises
       | USA   |
       | India |
 
+  Scenario: To find out if a string is palindrome or not
+    Given The input string is ""
+    When palindrome method is executed
+    Then then true is returned
+
+    Given The input string is "a"
+    When palindrome method is executed
+    Then then true is returned
+
+    Given The input string is "civic"
+    When palindrome method is executed
+    Then then true is returned
+
+    Given The input string is "Civic"
+    When palindrome method is executed
+    Then then true is returned
+
+    Given The input string is "I did did I"
+    When palindrome method is executed
+    Then then true is returned
+
+    Given The input string is "I did dID i"
+    When palindrome method is executed
+    Then then true is returned
+
+    Given The input string is "chris"
+    When palindrome method is executed
+    Then then false is returned
+
+    Given The input string is "What do you mean"
+    When palindrome method is executed
+    Then then false is returned
+
