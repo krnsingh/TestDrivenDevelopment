@@ -13,46 +13,26 @@ public class Palindrome {
      */
     public boolean isPalindrome(String s) {
 
-        int stringLength=s.length();
-        String reverse=""; //Solution 1 variable
-        boolean flag=true;  // Solution 2 variable
 
-        switch(stringLength)
+        int length=s.length();
+        if(length==0 || length==1)
         {
-            case 0:
-                return true;
-            case 1:
-                return true;
-
-            default:
-            {
-                // Solution 1
-                /*for(int j=stringLength-1;j>=0;j--)
-                {
-                    reverse+=s.charAt(j);
-                }
-
-                if(reverse.equalsIgnoreCase(s))
-                    return true;
-                else
-                    return false;
-                */
-
-                // Solution 2
-
-                for(int i=0,j=stringLength-1;i<stringLength;i++,j--)
-                {
-                    if(Character.toLowerCase(s.charAt(i))!= Character.toLowerCase(s.charAt(j)))
-                    {
-                        flag= false;
-                        break;
-                    }
-                }
-                return flag;
-            }
-
-
+            return true;
         }
+        else
+        {
+            if(Character.toLowerCase(s.charAt(0))== Character.toLowerCase(s.charAt(length-1)))
+            {
+                s=s.substring(1,length-1);
+                isPalindrome(s);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
     }
 
 }
