@@ -11,28 +11,32 @@ public class Palindrome {
      * @param s string to determine if a palindrome
      * @return true if the parameter is a palindrome and false otherwise
      */
+    int length;
     public boolean isPalindrome(String s) {
 
-
-        int length=s.length();
-        if(length==0 || length==1)
-        {
+       length = s.length();
+        if (length == 0 || length == 1) {
             return true;
-        }
-        else
-        {
-            if(Character.toLowerCase(s.charAt(0))== Character.toLowerCase(s.charAt(length-1)))
-            {
-                s=s.substring(1,length-1);
-                isPalindrome(s);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+        } else {
+            // extra white spaces ' '
+            if (s.charAt(0) == ' ' || s.charAt(length - 1) == ' ') {
+                if (s.charAt(0) == ' ' && s.charAt(length - 1) == ' ') {
+                    s = s.substring(1, length - 1);
+                } else if (s.charAt(0) != ' ' && s.charAt(length - 1) == ' ') {
+                    s = s.substring(0, length - 1);
+                } else if (s.charAt(0) == ' ' && s.charAt(length - 1) != ' ') {
+                    s = s.substring(1, length);
+                }
 
+                return isPalindrome(s);
+            } else {
+                if (Character.toLowerCase(s.charAt(0)) == Character.toLowerCase(s.charAt(length - 1))) {
+                    s = s.substring(1, length - 1);
+                    return isPalindrome(s);
+                } else {
+                    return false;
+                }
+            }
+        }
     }
-
 }
