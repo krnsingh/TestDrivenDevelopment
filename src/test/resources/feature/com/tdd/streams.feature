@@ -30,7 +30,7 @@ Feature: To test various stream collection exercises
     When palindrome method is executed
     Then then true is returned
 
-    Given The input string is "I did did I"
+    Given The input string is "I did did I !!"
     When palindrome method is executed
     Then then true is returned
 
@@ -42,7 +42,11 @@ Feature: To test various stream collection exercises
     When palindrome method is executed
     Then then false is returned
 
-    Given The input string is "What do you mean"
+    Given The input string is "What do you mean ?"
     When palindrome method is executed
     Then then false is returned
+
+    Given The input string is "Marge, let a moody baby doom a telegram ?!"
+    When palindrome method is executed
+    Then then true is returned
 

@@ -1,5 +1,8 @@
 package com.tdd.collections;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class Palindrome {
 
 
@@ -12,31 +15,37 @@ public class Palindrome {
      * @return true if the parameter is a palindrome and false otherwise
      */
     int length;
+    int firstCheck=0;
     public boolean isPalindrome(String s) {
 
-       length = s.length();
-        if (length == 0 || length == 1) {
-            return true;
-        } else {
-            // extra white spaces ' '
-            if (s.charAt(0) == ' ' || s.charAt(length - 1) == ' ') {
-                if (s.charAt(0) == ' ' && s.charAt(length - 1) == ' ') {
-                    s = s.substring(1, length - 1);
-                } else if (s.charAt(0) != ' ' && s.charAt(length - 1) == ' ') {
-                    s = s.substring(0, length - 1);
-                } else if (s.charAt(0) == ' ' && s.charAt(length - 1) != ' ') {
-                    s = s.substring(1, length);
-                }
-
-                return isPalindrome(s);
-            } else {
-                if (Character.toLowerCase(s.charAt(0)) == Character.toLowerCase(s.charAt(length - 1))) {
-                    s = s.substring(1, length - 1);
-                    return isPalindrome(s);
-                } else {
-                    return false;
-                }
-            }
+        if (firstCheck == 0) {
+            firstCheck++;
+            s=refinedText(s);
+            return isPalindrome(s);
         }
+        else {
+            length = s.length();
+            if (length == 0 || length == 1) {
+                return true;
+            } else {
+
+                    if (Character.toLowerCase(s.charAt(0)) == Character.toLowerCase(s.charAt(length - 1))) {
+                        s = s.substring(1, length - 1);
+                        return isPalindrome(s);
+                    } else {
+                        return false;
+                    }
+                }
+        }
+
+    }
+
+    public String refinedText(String s)
+    {
+        String expression="[!?,'\\s\\.]";
+        Pattern p=Pattern.compile(expression);
+        Matcher m=p.matcher(s);
+        s=m.replaceAll("");
+        return s;
     }
 }
