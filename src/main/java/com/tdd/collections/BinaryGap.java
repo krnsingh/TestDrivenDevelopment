@@ -7,36 +7,36 @@ public class BinaryGap {
     public int solution(int N) {
 
         StringBuilder binary = binaryForm(N);
-        int lastCount = 0, presentCount = 0, numberOfGaps = 0;
+        int lastCount = 0, presentCount = 0, numberOfGaps=0;
 
         for (int i = 0; i < binary.length(); i++) {
-            if (binary.charAt(i) == '1') // looks for occurence of 1 for chain break/initiation
+            if (binary.charAt(i) == '1') // looks for occurrence of 1 for chain break/initiation
             {
-                if (i > 1 && binary.charAt(i - 1) == '1') // check for consecutive 1's
+                if(i==0)
+                {
+                    numberOfGaps=0;
+                }
+                else if (i > 1 && binary.charAt(i - 1) == '1') // check for consecutive 1's
                 {
                     presentCount = 0; // if so then break the chain
-                } else {
+                }
+                else {
 
-                    if (lastCount <= presentCount) // look for greater value
+                    if (lastCount <= presentCount) // look for greater value of chain count
                     {
                         lastCount = presentCount;
-                        presentCount = 0;
                     }
+                    presentCount = 0;
                     numberOfGaps++;
                 }
             }
 
             else {
-                if (i == binary.length()-1) {
-                    presentCount = 0; //
-                    numberOfGaps--;
-                } else {
                     presentCount++; // increasing chain count
-                }
             }
         }
 
-        System.out.println(lastCount + " : " + presentCount + " : " + numberOfGaps);
+        System.out.println(lastCount + " : " + numberOfGaps);
         return lastCount;
     }
 
