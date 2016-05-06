@@ -6,51 +6,35 @@ package com.tdd.collections;
 public class BinaryGap {
     public int solution(int N) {
 
-        StringBuilder binary = binaryForm(N);
-        int lastCount = 0, presentCount = 0, numberOfGaps=0;
+        String binaryForm =Integer.toBinaryString(N);
+        System.out.println(binaryForm);
 
-        for (int i = 0; i < binary.length(); i++) {
-            if (binary.charAt(i) == '1') // looks for occurrence of 1 for chain break/initiation
+        int len= binaryForm.length();
+        int x,last;
+        int countGaps =0,presentCount=0,greatestCount=0;
+        x= binaryForm.indexOf("1");  // first occurrence of '1'
+
+        while(x<len-1)
+        {
+            last= binaryForm.indexOf("1", x+1);  // next occurrence of '1'
+            if(last==-1) // check if there is no '1' in the string
+                break;
+
+            presentCount=last-x-1;
+            if(presentCount>0)    // check for binary gap.
             {
-                if(i==0)
-                {
-                    numberOfGaps=0;
-                }
-                else if (i > 1 && binary.charAt(i - 1) == '1') // check for consecutive 1's
-                {
-                    presentCount = 0; // if so then break the chain
-                }
-                else {
+                if(presentCount > greatestCount)
+                    greatestCount=presentCount;
 
-                    if (lastCount <= presentCount) // look for greater value of chain count
-                    {
-                        lastCount = presentCount;
-                    }
-                    presentCount = 0;
-                    numberOfGaps++;
-                }
+                countGaps++;
             }
 
-            else {
-                    presentCount++; // increasing chain count
-            }
+            x=last;   // assignment for next search
         }
+        System.out.println("Number of Binary Gaps: "+ countGaps);
+        //System.out.println(greatestCount);
 
-        System.out.println(lastCount + " : " + numberOfGaps);
-        return lastCount;
-    }
-
-    public StringBuilder binaryForm(int N) {
-        int rem;
-        int quotient = N;
-        StringBuilder revBinary = new StringBuilder("");
-        while (quotient > 1) {
-            rem = quotient % 2;
-            quotient /= 2;
-            revBinary.append(rem);
-        }
-        revBinary.append(quotient);
-        return revBinary.reverse();
+        return greatestCount;
     }
 
 }
